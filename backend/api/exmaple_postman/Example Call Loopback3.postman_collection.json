@@ -38,7 +38,95 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": ""
+							"raw": "{{host}}/api/projects?filter[include][0][relation]=user",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "filter[include][0][relation]",
+									"value": "user"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Test Upload Image",
+			"item": [
+				{
+					"name": "Test Upload New Image",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/Users/test-update-data-by-body-params?access_token=mKQY1iixPGHmhLPr0HglGJctgQFWnKKMbeLQVdqP6EWGAZFJyEcUj2KZ3FWldAW3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"Users",
+								"test-update-data-by-body-params"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "mKQY1iixPGHmhLPr0HglGJctgQFWnKKMbeLQVdqP6EWGAZFJyEcUj2KZ3FWldAW3"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Test  Action To Custom Route",
+			"item": [
+				{
+					"name": "Test  User Custom Route",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstName\": \"Jadon\",\n    \"address\": {\n        \"street\": \"street\"\n    },\n    \"color\": [\"red\",\"green\",\"blue\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{host}}/api/users/test-update-data-by-body-params?access_token=mKQY1iixPGHmhLPr0HglGJctgQFWnKKMbeLQVdqP6EWGAZFJyEcUj2KZ3FWldAW3",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"test-update-data-by-body-params"
+							],
+							"query": [
+								{
+									"key": "access_token",
+									"value": "mKQY1iixPGHmhLPr0HglGJctgQFWnKKMbeLQVdqP6EWGAZFJyEcUj2KZ3FWldAW3"
+								}
+							]
 						}
 					},
 					"response": []

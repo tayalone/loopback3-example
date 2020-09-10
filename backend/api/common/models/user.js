@@ -127,4 +127,32 @@ module.exports = function (User) {
       { arg: "res", type: "object", http: { source: "res" } },
     ],
   });
+  User.testUpdateDataByBodyParams = async (
+    req,
+    res,
+    options,
+    firstName,
+    address,
+    color
+  ) => {
+    try {
+      return res.send({ message: "OK", firstName, address, color });
+    } catch (e) {
+      console.log("e", e);
+      return res
+        .status(500)
+        .send({ message: "error from Users/test-upload-image" });
+    }
+  };
+  User.remoteMethod("testUpdateDataByBodyParams", {
+    http: { path: "/test-update-data-by-body-params", verb: "post" },
+    accepts: [
+      { arg: "req", type: "object", http: { source: "req" } },
+      { arg: "res", type: "object", http: { source: "res" } },
+      { arg: "options", type: "object", http: "optionsFromRequest" },
+      { arg: "firstName", type: "string", required: true },
+      { arg: "address", type: "object", required: true },
+      { arg: "color", type: "array", required: true },
+    ],
+  });
 };
