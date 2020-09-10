@@ -1,0 +1,73 @@
+{
+	"info": {
+		"_postman_id": "8fdc2f2c-5107-411f-bf80-521e3956cb13",
+		"name": "Example Call Loopback3",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Test Call One To many",
+			"item": [
+				{
+					"name": "ดึง ข้อมูล Project (Many) มาพร้อมกับ ข้อมูล User (One) แบบ populate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{host}}/api/Users?filter[include][0][relation]=projects",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"Users"
+							],
+							"query": [
+								{
+									"key": "filter[include][0][relation]",
+									"value": "projects"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "ดึงข้อมูล user (many) มาพร้อมกับ project(one) แบบ populate",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "3af17b9a-75f5-4c51-8fba-79a8b25a7de9",
+				"type": "text/javascript",
+				"exec": [
+					"pm.globals.set(\"host\",\"http://localhost:5000\");"
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d1fbbfb8-d264-4299-8fee-210e22cca4a3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"protocolProfileBehavior": {}
+}

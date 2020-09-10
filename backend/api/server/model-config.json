@@ -9,11 +9,11 @@
     "mixins": [
       "loopback/common/mixins",
       "loopback/server/mixins",
+      "../node_modules/loopback-ds-timestamp-mixin",
       "../common/mixins",
       "./mixins"
     ]
   },
-
   "user": {
     "dataSource": "mongo",
     "public": true
@@ -43,5 +43,9 @@
   "Role": {
     "dataSource": "mongo",
     "public": false
+  },
+  "project": {
+    "dataSource": "mongo",
+    "public": true
   }
 }

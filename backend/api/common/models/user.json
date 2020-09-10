@@ -30,8 +30,44 @@
       "options": {
         "disableInclude": true
       }
+    },
+    "projects": {
+      "type": "hasMany",
+      "model": "project",
+      "foreignKey": "",
+      "options": {
+        "nestRemoting": true
+      }
     }
   },
-  "acls": [],
+  "acls": [
+    {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "testAuth"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW",
+      "property": "testAuthAdmin"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "advertiser",
+      "permission": "ALLOW",
+      "property": "testAuthAdvertiser"
+    }
+  ],
   "methods": {}
 }
