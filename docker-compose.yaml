@@ -1,9 +1,9 @@
-version: "3.7"
+version: '3.7'
 services:
   database:
-    image: "mongo:4.2.3"
+    image: 'mongo:4.2.3'
     ports:
-      - "27017:27017"
+      - '27017:27017'
     volumes:
       - ./deploy/init-mongo.sh:/docker-entrypoint-initdb.d/init-mongo.sh
     env_file: .env
@@ -13,3 +13,16 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=123456
       - MONGO_INITDB_USERNAME=admin
       - MONGO_INITDB_PASSWORD=123456
+  backend:
+    command: ['npm', 'run', 'dev']
+    ports:
+      - '5000:3000'
+    build:
+      context: backend/api
+      dockerfile: Dockerfile
+    volumes:
+      - ./backend/api:/app
+      - /app/node_modules
+    env_file: .env
+    depends_on:
+      - database
