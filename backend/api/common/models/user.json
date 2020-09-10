@@ -67,6 +67,13 @@
       "principalId": "advertiser",
       "permission": "ALLOW",
       "property": "testAuthAdvertiser"
+    },
+    {
+      "accessType": "EXECUTE",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW",
+      "property": "testUploadImage"
     }
   ],
   "methods": {}

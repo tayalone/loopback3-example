@@ -13,6 +13,27 @@
     "budget": {
       "type": "number",
       "required": true
+    },
+    "address": {
+      "type": "object",
+      "default": {
+        "floor": "",
+        "street": "",
+        "district": "",
+        "country": "",
+        "postcode": 0
+      }
+    },
+    "materails": {
+      "type": [
+        {
+          "type": {
+            "materialName": "string",
+            "price": "number"
+          }
+        }
+      ],
+      "default": []
     }
   },
   "validations": [],

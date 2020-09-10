@@ -2,6 +2,9 @@
 
 const app = require("../../server/server");
 
+const promiseMultiParty = require("../../server/libs/promiseMultiparty");
+const uploadImageS3Async = require("../../server/libs/aws/uploadImageS3Async");
+
 module.exports = function (User) {
   User.observe("after save", async function bindRoleAfterSave(ctx) {
     if (ctx.isNewInstance) {
@@ -68,6 +71,57 @@ module.exports = function (User) {
   };
   User.remoteMethod("testAuthAdvertiser", {
     http: { path: "/test-auth-advertiser", verb: "get" },
+    accepts: [
+      { arg: "req", type: "object", http: { source: "req" } },
+      { arg: "res", type: "object", http: { source: "res" } },
+    ],
+  });
+
+  User.testUploadImage = async (req, res) => {
+    try {
+      const { fields, files } = await promiseMultiParty(req);
+      console.log(`fields`, fields);
+      console.log(`files`, files);
+
+      const image = files.image[0];
+      const dimensions = fields.dimensions[0];
+
+      const ressult = await uploadImageS3Async(
+        image,
+        dimensions,
+        "test-loppback3/"
+      );
+
+      //image, dimensions, awsPath
+
+      const { isSuccess } = ressult;
+      if (isSuccess) {
+        const { result } = ressult;
+        const newImage = result.reduce((acc, data) => {
+          const { type } = data;
+          const tmpAcc = { ...acc };
+          tmpAcc[type] = data;
+          return tmpAcc;
+        }, {});
+
+        return res.send({ message: "OK", newImage: newImage });
+      } else {
+        return res.status(500).send({
+          message: "upload failed",
+          key: "upload_failed".toUpperCase(),
+        });
+      }
+
+      return res.send({ message: "OK", ressult });
+    } catch (e) {
+      console.log("e", e);
+      return res
+        .status(500)
+        .send({ message: "error from Users/test-upload-image" });
+    }
+  };
+  User.remoteMethod("testUploadImage", {
+    http: { path: "/test-upload-image", verb: "post" },
     accepts: [
       { arg: "req", type: "object", http: { source: "req" } },
       { arg: "res", type: "object", http: { source: "res" } },
